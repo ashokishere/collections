@@ -108,7 +108,7 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [triggerSurprise]);
 
-  const REMOTE_URL = '/Database.xlsx';
+  const REMOTE_URL = `${import.meta.env.BASE_URL}Database.xlsx`;
 
   const playerRef = useRef<HTMLDivElement>(null);
   const playerInstance = useRef<any>(null);
@@ -141,8 +141,8 @@ export default function App() {
       let response = await fetch(`${REMOTE_URL}?t=${Date.now()}`);
       
       // Fallback to lowercase if Database.xlsx not found
-      if (!response.ok && REMOTE_URL === '/Database.xlsx') {
-        const lowerUrl = '/database.xlsx';
+      if (!response.ok) {
+        const lowerUrl = `${import.meta.env.BASE_URL}database.xlsx`;
         response = await fetch(`${lowerUrl}?t=${Date.now()}`);
       }
 
