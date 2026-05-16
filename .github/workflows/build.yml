@@ -42,7 +42,12 @@ jobs:
       
       - name: Build application
         working-directory: ./src
+        env:
+          GITHUB_PAGES: 'true'
         run: npm run build
+      
+      - name: Add .nojekyll file
+        run: touch src/dist/.nojekyll
       
       - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
